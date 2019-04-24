@@ -29,8 +29,12 @@ test_images = test_images / 255.0
 model = keras.Sequential \
 (
     [
-        keras.layers.Flatten(input_shape=(28, 28)),
-        keras.layers.Dense(128, activation="relu"),
+        keras.layers.Reshape((28, 28, 1), input_shape = (28, 28)),
+        keras.layers.Conv2D(32, kernel_size = 2, activation = "relu", padding = "same"),
+        keras.layers.MaxPool2D(1),
+        keras.layers.Conv2D(64, kernel_size = 4, activation = "relu", padding = "same"),
+        keras.layers.MaxPool2D(1),
+        keras.layers.Flatten(),
         keras.layers.Dense(10, activation="softmax")
     ]
 )
